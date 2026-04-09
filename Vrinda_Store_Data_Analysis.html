@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vrinda Store Annual Report 2022</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0d0d0f;
+      --surface: #15151a;
+      --card: #1c1c24;
+      --border: #2a2a38;
+      --accent: #e8935a;
+      --accent2: #7b6ef6;
+      --accent3: #4ecdc4;
+      --text: #f0ede8;
+      --muted: #8a8799;
+      --gold: #f5c842;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 90px 60px 70px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 80% 40%, rgba(232,147,90,.13) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 50% at 20% 80%, rgba(123,110,246,.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(232,147,90,.12);
+      border: 1px solid rgba(232,147,90,.35);
+      color: var(--accent);
+      font-size: .72rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      max-width: 680px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 520px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 42px;
+    }
+    .meta-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 18px;
+    }
+    .meta-pill .icon { font-size: 1.25rem; }
+    .meta-pill .label { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+    .meta-pill .val { font-size: .95rem; font-weight: 500; }
+
+    /* ── Layout ── */
+    .content { max-width: 1100px; margin: 0 auto; padding: 60px 40px 100px; }
+
+    /* ── Section headings ── */
+    .section { margin-bottom: 72px; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-title .emoji { font-size: 1.5rem; }
+    .section-title .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    /* ── Stat cards row ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+    .stat-card:hover::after { transform: scaleX(1); }
+    .stat-label { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 8px; }
+    .stat-value { font-size: 1.7rem; font-weight: 500; color: var(--accent); font-family: 'Playfair Display', serif; }
+    .stat-sub { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── Info cards (bullets) ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 28px;
+      transition: border-color .25s;
+    }
+    .info-card:hover { border-color: var(--accent2); }
+    .info-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-card ul { list-style: none; }
+    .info-card ul li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 9px;
+      font-size: .88rem;
+      color: #c4c0d6;
+      line-height: 1.55;
+    }
+    .info-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10px;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .info-card ul li strong { color: var(--text); font-weight: 500; }
+
+    /* ── Table ── */
+    .table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: rgba(232,147,90,.09); }
+    th {
+      text-align: left;
+      padding: 14px 20px;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 13px 20px;
+      font-size: .88rem;
+      border-bottom: 1px solid var(--border);
+      color: #c4c0d6;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,.025); }
+    .rank { color: var(--gold); font-weight: 600; }
+    .amt { color: var(--accent3); font-weight: 500; }
+
+    /* ── Bar chart ── */
+    .bar-list { display: flex; flex-direction: column; gap: 14px; }
+    .bar-item { display: flex; flex-direction: column; gap: 6px; }
+    .bar-header { display: flex; justify-content: space-between; font-size: .85rem; }
+    .bar-name { color: var(--text); }
+    .bar-val { color: var(--muted); font-size: .8rem; }
+    .bar-track {
+      height: 8px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      animation: grow .8s cubic-bezier(.4,0,.2,1) both;
+    }
+    @keyframes grow { from { width: 0 } }
+
+    /* ── Monthly table ── */
+    .month-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .month-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+      transition: border-color .2s, transform .2s;
+    }
+    .month-card:hover { border-color: var(--accent3); transform: translateY(-2px); }
+    .month-card.peak { border-color: var(--accent); background: rgba(232,147,90,.06); }
+    .month-name { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 8px; }
+    .month-rev { font-size: 1.05rem; font-weight: 500; color: var(--accent3); }
+    .month-orders { font-size: .75rem; color: var(--muted); margin-top: 4px; }
+    .month-card.peak .month-rev { color: var(--accent); }
+
+    /* ── Conclusions ── */
+    .conclusions { display: flex; flex-direction: column; gap: 14px; }
+    .conclusion-item {
+      display: flex;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+      align-items: flex-start;
+      transition: border-color .2s;
+    }
+    .conclusion-item:hover { border-color: var(--accent2); }
+    .conclusion-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .conclusion-text { font-size: .9rem; color: #c4c0d6; line-height: 1.6; }
+    .conclusion-text strong { color: var(--text); }
+
+    /* ── Columns dataset ── */
+    .columns-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .col-tag {
+      background: rgba(123,110,246,.12);
+      border: 1px solid rgba(123,110,246,.25);
+      color: #a89ef8;
+      font-size: .78rem;
+      padding: 5px 13px;
+      border-radius: 100px;
+      font-family: 'DM Sans', monospace;
+    }
+
+    /* ── Workbook sheets ── */
+    .sheets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .sheet-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent2);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .sheet-card .sheet-name { font-weight: 500; font-size: .9rem; margin-bottom: 5px; color: var(--text); }
+    .sheet-card .sheet-desc { font-size: .78rem; color: var(--muted); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+      font-size: .78rem;
+      border-top: 1px solid var(--border);
+    }
+    footer span { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 50px 24px 44px; }
+      .content { padding: 40px 20px 70px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-badge">📊 Annual Sales Report</div>
+  <h1>Vrinda Store <span>Data Analysis</span><br>2022</h1>
+  <p class="hero-sub">End-to-end e-commerce sales intelligence — orders, revenue, channels, demographics & geography.</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><span class="icon">🛒</span><div><div class="label">Total Orders</div><div class="val">31,047</div></div></div>
+    <div class="meta-pill"><span class="icon">💰</span><div><div class="label">Annual Revenue</div><div class="val">₹2.11 Crore</div></div></div>
+    <div class="meta-pill"><span class="icon">🗓️</span><div><div class="label">Period</div><div class="val">Jan – Dec 2022</div></div></div>
+    <div class="meta-pill"><span class="icon">🔧</span><div><div class="label">Tool</div><div class="val">Microsoft Excel</div></div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ═══ PROJECT OVERVIEW ═══ -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">📁</span> Project Overview <div class="line"></div></div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-label">Dataset Rows</div><div class="stat-value">31,047</div><div class="stat-sub">Order records</div></div>
+      <div class="stat-card"><div class="stat-label">Columns</div><div class="stat-value">21</div><div class="stat-sub">Data attributes</div></div>
+      <div class="stat-card"><div class="stat-label">Currency</div><div class="stat-value">INR ₹</div><div class="stat-sub">Indian Rupees</div></div>
+      <div class="stat-card"><div class="stat-label">Avg Order Value</div><div class="stat-value">₹682</div><div class="stat-sub">Per transaction</div></div>
+      <div class="stat-card"><div class="stat-label">Max Order Value</div><div class="stat-value">₹3,036</div><div class="stat-sub">Single order</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ DATASET COLUMNS ═══ -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">🗂️</span> Dataset Columns <div class="line"></div></div>
+    <div class="columns-grid">
+      <span class="col-tag">Order ID</span><span class="col-tag">Cust ID</span><span class="col-tag">Gender</span>
+      <span class="col-tag">Age</span><span class="col-tag">Age Group</span><span class="col-tag">Date</span>
+      <span class="col-tag">Month</span><span class="col-tag">Status</span><span class="col-tag">Channel</span>
+      <span class="col-tag">SKU</span><span class="col-tag">Category</span><span class="col-tag">Size</span>
+      <span class="col-tag">Qty</span><span class="col-tag">Amount</span><span class="col-tag">ship-city</span>
+      <span class="col-tag">ship-state</span><span class="col-tag">ship-postal-code</span><span class="col-tag">ship-country</span>
+      <span class="col-tag">B2B</span><span class="col-tag">currency</span><span class="col-tag">index</span>
+    </div>
+  </div>
+
+  <!-- ═══ WORKBOOK STRUCTURE ═══ -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">📋</span> Workbook Structure <div class="line"></div></div>
+    <div class="sheets-grid">
+      <div class="sheet-card"><div class="sheet-name">Vrinda Store</div><div class="sheet-desc">Raw cleaned data — 31,047 rows of orders</div></div>
+      <div class="sheet-card"><div class="sheet-name">Vrinda Store Report</div><div class="sheet-desc">Summary dashboard sheet</div></div>
+      <div class="sheet-card"><div class="sheet-name">Orders Vs Sales</div><div class="sheet-desc">Monthly order count & revenue pivot</div></div>
+      <div class="sheet-card"><div class="sheet-name">Men Vs Women</div><div class="sheet-desc">Gender-wise revenue split</div></div>
+      <div class="sheet-card"><div class="sheet-name">Order Status</div><div class="sheet-desc">Delivery, cancellation, return, refund stats</div></div>
+      <div class="sheet-card"><div class="sheet-name">Top 5 States</div><div class="sheet-desc">State-wise revenue leaders</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ MONTHLY TRENDS ═══ -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">🗓️</span> Monthly Sales Trends <div class="line"></div></div>
+    <div class="month-grid">
+      <div class="month-card"><div class="month-name">Jan</div><div class="month-rev">₹18.2L</div><div class="month-orders">2,702 orders</div></div>
+      <div class="month-card"><div class="month-name">Feb</div><div class="month-rev">₹18.7L</div><div class="month-orders">2,750 orders</div></div>
+      <div class="month-card peak"><div class="month-name">Mar 🏆</div><div class="month-rev">₹19.3L</div><div class="month-orders">2,819 orders</div></div>
+      <div class="month-card"><div class="month-name">Apr</div><div class="month-rev">₹18.3L</div><div class="month-orders">2,685 orders</div></div>
+      <div class="month-card"><div class="month-name">May</div><div class="month-rev">₹17.9L</div><div class="month-orders">2,617 orders</div></div>
+      <div class="month-card"><div class="month-name">Jun</div><div class="month-rev">₹17.5L</div><div class="month-orders">2,597 orders</div></div>
+      <div class="month-card"><div class="month-name">Jul</div><div class="month-rev">₹17.7L</div><div class="month-orders">2,579 orders</div></div>
+      <div class="month-card"><div class="month-name">Aug</div><div class="month-rev">₹18.1L</div><div class="month-orders">2,617 orders</div></div>
+      <div class="month-card"><div class="month-name">Sep</div><div class="month-rev">₹16.9L</div><div class="month-orders">2,490 orders</div></div>
+      <div class="month-card"><div class="month-name">Oct</div><div class="month-rev">₹16.7L</div><div class="month-orders">2,424 orders</div></div>
+      <div class="month-card"><div class="month-name">Nov</div><div class="month-rev">₹16.2L</div><div class="month-orders">2,383 orders</div></div>
+      <div class="month-card"><div class="month-name">Dec</div><div class="month-rev">₹16.2L</div><div class="month-orders">2,384 orders</div></div>
+    </div>
+    <div class="info-card" style="margin-top:18px;">
+      <ul>
+        <li><strong>Peak Month:</strong> March 2022 — ₹19,28,066 revenue & 2,819 orders (highest in the year)</li>
+        <li><strong>Lowest Month:</strong> November 2022 — ₹16,15,356 revenue & 2,383 orders</li>
+        <li>Sales showed a steady <strong>decline from March to November</strong>, with a slight uptick in December</li>
+        <li><strong>Q1 (Jan–Mar)</strong> is the strongest quarter — festival/seasonal promotions should be ramped up</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ KEY INSIGHTS ═══ -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">📈</span> Key Insights & Findings <div class="line"></div></div>
+    <div class="info-grid">
+
+      <!-- Gender -->
+      <div class="info-card">
+        <h3>👩‍🦰 Gender-Wise Sales</h3>
+        <div class="bar-list" style="margin-bottom:16px;">
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Women</span><span class="bar-val">₹1,35,62,773 (64%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:64%;background:var(--accent);animation-delay:.1s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Men</span><span class="bar-val">₹76,13,604 (36%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:36%;background:var(--accent2);animation-delay:.2s"></div></div>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Women</strong> are the dominant buyer segment at ~64% of total revenue</li>
+          <li>Women drove more purchasing across <strong>all categories</strong></li>
+        </ul>
+      </div>
+
+      <!-- Order Status -->
+      <div class="info-card">
+        <h3>📦 Order Status</h3>
+        <div class="bar-list" style="margin-bottom:16px;">
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">✅ Delivered</span><span class="bar-val">28,641 (92.2%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:92%;background:var(--accent3);animation-delay:.1s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">↩ Returned</span><span class="bar-val">1,045 (3.4%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:3.4%;background:#f5a442;animation-delay:.2s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">❌ Cancelled</span><span class="bar-val">844 (2.7%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:2.7%;background:#e05c5c;animation-delay:.3s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">💸 Refunded</span><span class="bar-val">517 (1.7%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:1.7%;background:var(--accent2);animation-delay:.4s"></div></div>
+          </div>
+        </div>
+        <ul><li>Excellent <strong>92.2% fulfillment rate</strong> — return rate worth investigating further</li></ul>
+      </div>
+
+      <!-- Channels -->
+      <div class="info-card">
+        <h3>🏪 Sales Channel Performance</h3>
+        <div class="bar-list" style="margin-bottom:16px;">
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Amazon</span><span class="bar-val">11,016 (35.5%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--gold);animation-delay:.05s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Myntra</span><span class="bar-val">7,254 (23.4%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:65%;background:var(--accent);animation-delay:.1s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Flipkart</span><span class="bar-val">6,703 (21.6%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:60%;background:var(--accent2);animation-delay:.15s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Ajio</span><span class="bar-val">1,931 (6.2%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--accent3);animation-delay:.2s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Nalli / Meesho / Others</span><span class="bar-val">4,143 (13.4%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:37%;background:var(--muted);animation-delay:.25s"></div></div>
+          </div>
+        </div>
+        <ul>
+          <li>Amazon alone accounts for over <strong>1/3rd of all orders</strong></li>
+          <li>Amazon + Myntra + Flipkart = <strong>80%+ of total sales</strong></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="info-card">
+        <h3>👗 Category Breakdown</h3>
+        <div class="bar-list" style="margin-bottom:16px;">
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Set</span><span class="bar-val">12,391 (39.9%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent);animation-delay:.1s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Kurta</span><span class="bar-val">10,446 (33.6%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:84%;background:var(--accent2);animation-delay:.15s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Western Dress</span><span class="bar-val">4,066 (13.1%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:33%;background:var(--accent3);animation-delay:.2s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Top</span><span class="bar-val">2,193 (7.1%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--gold);animation-delay:.25s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Others</span><span class="bar-val">1,951 (6.3%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:16%;background:var(--muted);animation-delay:.3s"></div></div>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Set & Kurta</strong> together account for 73.5% of orders</li>
+          <li>Inventory should be focused on these two categories</li>
+        </ul>
+      </div>
+
+      <!-- Age Group -->
+      <div class="info-card">
+        <h3>👥 Age Group Analysis</h3>
+        <div class="bar-list" style="margin-bottom:16px;">
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Adults (18–59)</span><span class="bar-val">15,543 (50.1%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent);animation-delay:.1s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Teenagers (&lt;18)</span><span class="bar-val">9,415 (30.3%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:60%;background:var(--accent2);animation-delay:.15s"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header"><span class="bar-name">Seniors (60+)</span><span class="bar-val">6,089 (19.6%)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:39%;background:var(--accent3);animation-delay:.2s"></div></div>
+          </div>
+        </div>
+        <ul><li>Adults are the <strong>primary target demographic</strong> — campaigns should skew toward 18–59 age group</li></ul>
+      </div>
+
+      <!-- Size & B2B -->
+      <div class="info-card">
+        <h3>📏 Size & B2B Distribution</h3>
+        <ul>
+          <li><strong>M</strong> – 5,485 orders | <strong>L</strong> – 5,144 | <strong>XL</strong> – 4,437</li>
+          <li><strong>S</strong> – 4,176 | <strong>XXL</strong> – 4,065 | <strong>3XL</strong> – 3,347</li>
+          <li>Larger sizes (3XL–6XL) collectively account for <strong>~12%</strong> of orders</li>
+          <li><strong>B2C</strong> – 30,861 orders (99.4%) — almost entirely consumer-facing</li>
+          <li><strong>B2B</strong> – only 186 orders (0.6%) — negligible bulk business</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ TOP 5 STATES ═══ -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">🗺️</span> Top 5 States by Revenue <div class="line"></div></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>State</th><th>Revenue</th><th>Share</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="rank">🥇 1</td><td>Maharashtra</td><td class="amt">₹29,90,221</td><td>14.2%</td></tr>
+          <tr><td class="rank">🥈 2</td><td>Karnataka</td><td class="amt">₹26,46,358</td><td>12.5%</td></tr>
+          <tr><td class="rank">🥉 3</td><td>Uttar Pradesh</td><td class="amt">₹21,04,659</td><td>9.9%</td></tr>
+          <tr><td class="rank">4</td><td>Telangana</td><td class="amt">₹17,12,439</td><td>8.1%</td></tr>
+          <tr><td class="rank">5</td><td>Tamil Nadu</td><td class="amt">₹16,78,877</td><td>7.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ BUSINESS CONCLUSIONS ═══ -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">💡</span> Business Conclusions <div class="line"></div></div>
+    <div class="conclusions">
+      <div class="conclusion-item"><div class="conclusion-icon">🎯</div><div class="conclusion-text"><strong>Target audience:</strong> Women aged 18–59 are the core customer base — all marketing and product decisions should center this segment.</div></div>
+      <div class="conclusion-item"><div class="conclusion-icon">📱</div><div class="conclusion-text"><strong>Focus platforms:</strong> Amazon, Myntra, and Flipkart together handle 80%+ of sales — advertising budget should be concentrated on these three channels.</div></div>
+      <div class="conclusion-item"><div class="conclusion-icon">📍</div><div class="conclusion-text"><strong>Top geography:</strong> Maharashtra and Karnataka are the highest-revenue states — ideal for targeted regional promotions and faster logistics.</div></div>
+      <div class="conclusion-item"><div class="conclusion-icon">👘</div><div class="conclusion-text"><strong>Best product lines:</strong> Sets and Kurtas dominate at 73.5% of orders — inventory planning and new launches should prioritize these categories.</div></div>
+      <div class="conclusion-item"><div class="conclusion-icon">✅</div><div class="conclusion-text"><strong>Fulfillment is strong</strong> at 92.2% delivery rate, but the 3.4% return rate should be investigated to identify size/category patterns driving returns.</div></div>
+      <div class="conclusion-item"><div class="conclusion-icon">📅</div><div class="conclusion-text"><strong>Q1 (Jan–Mar) is the strongest quarter</strong> — festival and seasonal promotions, offers, and new stock launches should be front-loaded in this window.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Vrinda Store Annual Report &nbsp;•&nbsp; <span>2022</span> &nbsp;•&nbsp; Analysed with Microsoft Excel &nbsp;•&nbsp; Data: 31,047 orders
+</footer>
+
+</body>
+</html>
